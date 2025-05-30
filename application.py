@@ -4,7 +4,7 @@ from tensorflow.keras.models import load_model
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from bnltk.tokenize import Tokenizers
+from bnlp import BasicTokenizer
 from langdetect import detect, LangDetectException
 import re
 import nltk
@@ -61,6 +61,7 @@ with open(tokenizer_path_bn, 'rb') as file:
     tokenizer_bn = pickle.load(file)
 
 
+
 # Function to preprocess input - defined at module level
 def preprocess_text(text):
     review = re.sub('[^a-zA-Z]', ' ', text)
@@ -76,7 +77,8 @@ def preprocess_text(text):
 def preprocess_text_for_bangla(text):
     reviews = re.sub(r'\b[a-zA-Z]+\b', '', text)
     # tokenize
-    words = Tokenizers.bn_word_tokenizer(reviews)
+    bnlp_tokenizer = BasicTokenizer()
+    words = bnlp_tokenizer(reviews)
     # remove punctuation marks
     reviews = [word for word in words if word not in punctuation_marks]
     # remove bangla stopwords
