@@ -1,0 +1,9 @@
+flask
+tensorflow==2.15.0
+pandas
+numpy
+nltk 
+scikit-learn
+langdetect
+gTTS
+streamlit
